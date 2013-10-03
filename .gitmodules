@@ -1,0 +1,3 @@
+[submodule "ffmpeg-iOS"]
+	path = ffmpeg-iOS
+	url = git@github.com:ifactorylab/ffmpeg-iOS.git
