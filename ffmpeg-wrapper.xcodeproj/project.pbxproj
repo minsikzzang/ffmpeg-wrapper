@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		A4554DC317FDC2BD005780ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DC217FDC2BD005780ED /* Foundation.framework */; };
-		A4554DC817FDC2BD005780ED /* ffmpeg_wrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4554DC717FDC2BD005780ED /* ffmpeg_wrapper.h */; };
-		A4554DCA17FDC2BD005780ED /* ffmpeg_wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A4554DC917FDC2BD005780ED /* ffmpeg_wrapper.m */; };
+		A4554DC817FDC2BD005780ED /* FFmpegWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4554DC717FDC2BD005780ED /* FFmpegWrapper.h */; };
+		A4554DCA17FDC2BD005780ED /* FFmpegWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A4554DC917FDC2BD005780ED /* FFmpegWrapper.m */; };
 		A4554DD117FDC2BE005780ED /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DD017FDC2BD005780ED /* XCTest.framework */; };
 		A4554DD217FDC2BE005780ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DC217FDC2BD005780ED /* Foundation.framework */; };
 		A4554DD417FDC2BE005780ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DD317FDC2BE005780ED /* UIKit.framework */; };
 		A4554DD717FDC2BE005780ED /* libffmpeg-wrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DBF17FDC2BD005780ED /* libffmpeg-wrapper.a */; };
 		A4554DDD17FDC2BE005780ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4554DDB17FDC2BE005780ED /* InfoPlist.strings */; };
-		A4554DDF17FDC2BE005780ED /* ffmpeg_wrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4554DDE17FDC2BE005780ED /* ffmpeg_wrapperTests.m */; };
+		A4554DDF17FDC2BE005780ED /* FFmpegWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4554DDE17FDC2BE005780ED /* FFmpegWrapperTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +35,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				A4554DC817FDC2BD005780ED /* ffmpeg_wrapper.h in CopyFiles */,
+				A4554DC817FDC2BD005780ED /* FFmpegWrapper.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,14 +45,14 @@
 		A4554DBF17FDC2BD005780ED /* libffmpeg-wrapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libffmpeg-wrapper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4554DC217FDC2BD005780ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4554DC617FDC2BD005780ED /* ffmpeg-wrapper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ffmpeg-wrapper-Prefix.pch"; sourceTree = "<group>"; };
-		A4554DC717FDC2BD005780ED /* ffmpeg_wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ffmpeg_wrapper.h; sourceTree = "<group>"; };
-		A4554DC917FDC2BD005780ED /* ffmpeg_wrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ffmpeg_wrapper.m; sourceTree = "<group>"; };
+		A4554DC717FDC2BD005780ED /* FFmpegWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFmpegWrapper.h; sourceTree = "<group>"; };
+		A4554DC917FDC2BD005780ED /* FFmpegWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFmpegWrapper.m; sourceTree = "<group>"; };
 		A4554DCF17FDC2BD005780ED /* ffmpeg-wrapperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ffmpeg-wrapperTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4554DD017FDC2BD005780ED /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A4554DD317FDC2BE005780ED /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		A4554DDA17FDC2BE005780ED /* ffmpeg-wrapperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ffmpeg-wrapperTests-Info.plist"; sourceTree = "<group>"; };
 		A4554DDC17FDC2BE005780ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A4554DDE17FDC2BE005780ED /* ffmpeg_wrapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ffmpeg_wrapperTests.m; sourceTree = "<group>"; };
+		A4554DDE17FDC2BE005780ED /* FFmpegWrapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFmpegWrapperTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +110,8 @@
 		A4554DC417FDC2BD005780ED /* ffmpeg-wrapper */ = {
 			isa = PBXGroup;
 			children = (
-				A4554DC717FDC2BD005780ED /* ffmpeg_wrapper.h */,
-				A4554DC917FDC2BD005780ED /* ffmpeg_wrapper.m */,
+				A4554DC717FDC2BD005780ED /* FFmpegWrapper.h */,
+				A4554DC917FDC2BD005780ED /* FFmpegWrapper.m */,
 				A4554DC517FDC2BD005780ED /* Supporting Files */,
 			);
 			path = "ffmpeg-wrapper";
@@ -128,7 +128,7 @@
 		A4554DD817FDC2BE005780ED /* ffmpeg-wrapperTests */ = {
 			isa = PBXGroup;
 			children = (
-				A4554DDE17FDC2BE005780ED /* ffmpeg_wrapperTests.m */,
+				A4554DDE17FDC2BE005780ED /* FFmpegWrapperTests.m */,
 				A4554DD917FDC2BE005780ED /* Supporting Files */,
 			);
 			path = "ffmpeg-wrapperTests";
@@ -224,7 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4554DCA17FDC2BD005780ED /* ffmpeg_wrapper.m in Sources */,
+				A4554DCA17FDC2BD005780ED /* FFmpegWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4554DDF17FDC2BE005780ED /* ffmpeg_wrapperTests.m in Sources */,
+				A4554DDF17FDC2BE005780ED /* FFmpegWrapperTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
