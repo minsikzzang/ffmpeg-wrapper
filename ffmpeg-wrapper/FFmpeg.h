@@ -1,6 +1,6 @@
 //
-//  FFmpegWrapper.h
-//  FFmpegWrapper
+//  FFmpeg.h
+//  FFmpeg
 //
 //  Created by Min Kim on 10/3/13.
 //  Copyright (c) 2013 iFactory Lab Limited. All rights reserved.
@@ -12,7 +12,7 @@ extern NSString const* kMovieUnknown;
 extern NSString const* kMovieMpeg4;
 extern NSString const* kMovieFLV;
 
-@interface FFmpegWrapper : NSObject
+@interface FFmpeg : NSObject
 
 @property (atomic, retain) NSString *inputFile;
 @property (atomic, assign) const NSString *inputFormat;

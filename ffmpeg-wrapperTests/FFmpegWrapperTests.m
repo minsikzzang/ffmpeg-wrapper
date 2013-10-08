@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "FFmpegWrapper.h"
+#import "FFmpeg.h"
 
 @interface FFmpegWrapperTests : XCTestCase
 
@@ -50,9 +50,9 @@ NSString const* kSourceMP4 = @"http://bcn01.livestation.com/test.mp4";
   NSLog(@"mp4 data size: %d", [mp4 length]);
   NSLog(@"mp4 path %@, flv path %@", mp4Path, flvPath);
   
-  FFmpegWrapper *ffmpeg = [[FFmpegWrapper alloc] init];
-  ffmpeg.input = mp4Path;
-  ffmpeg.output = flvPath;
+  FFmpeg *ffmpeg = [[FFmpeg alloc] init];
+  ffmpeg.inputFile = mp4Path;
+  ffmpeg.outputFile = flvPath;
   [ffmpeg run];
   
   /**

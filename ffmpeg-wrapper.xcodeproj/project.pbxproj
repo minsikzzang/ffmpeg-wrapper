@@ -8,23 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		A4554DC317FDC2BD005780ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DC217FDC2BD005780ED /* Foundation.framework */; };
-		A4554DC817FDC2BD005780ED /* FFmpegWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4554DC717FDC2BD005780ED /* FFmpegWrapper.h */; };
-		A4554DCA17FDC2BD005780ED /* FFmpegWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A4554DC917FDC2BD005780ED /* FFmpegWrapper.m */; };
+		A4554DC817FDC2BD005780ED /* FFmpeg.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4554DC717FDC2BD005780ED /* FFmpeg.h */; };
+		A4554DCA17FDC2BD005780ED /* FFmpeg.m in Sources */ = {isa = PBXBuildFile; fileRef = A4554DC917FDC2BD005780ED /* FFmpeg.m */; };
 		A4554DD117FDC2BE005780ED /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DD017FDC2BD005780ED /* XCTest.framework */; };
 		A4554DD217FDC2BE005780ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DC217FDC2BD005780ED /* Foundation.framework */; };
 		A4554DD417FDC2BE005780ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DD317FDC2BE005780ED /* UIKit.framework */; };
 		A4554DD717FDC2BE005780ED /* libffmpeg-wrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DBF17FDC2BD005780ED /* libffmpeg-wrapper.a */; };
 		A4554DDD17FDC2BE005780ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4554DDB17FDC2BE005780ED /* InfoPlist.strings */; };
 		A4554DDF17FDC2BE005780ED /* FFmpegWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4554DDE17FDC2BE005780ED /* FFmpegWrapperTests.m */; };
-		A4AD359C1802FA12002315B2 /* Muxer.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AD359B1802FA12002315B2 /* Muxer.m */; };
 		A4AD359F1802FE99002315B2 /* InputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AD359E1802FE99002315B2 /* InputStream.m */; };
 		A4AD35A218030386002315B2 /* OutputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AD35A118030386002315B2 /* OutputStream.m */; };
+		A4AD35A518041692002315B2 /* InputFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AD35A418041692002315B2 /* InputFile.m */; };
+		A4AD35A8180423C1002315B2 /* OutputFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AD35A7180423C1002315B2 /* OutputFile.m */; };
 		A4E6BEDF1802DEE00029601E /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6BEDE1802DEE00029601E /* libavformat.a */; };
 		A4E6BEE11802DF160029601E /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6BEE01802DF160029601E /* libavutil.a */; };
 		A4E6BEE31802DF2C0029601E /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6BEE21802DF2C0029601E /* libavcodec.a */; };
 		A4E6BEE61802DF6F0029601E /* libiconv.2.4.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6BEE41802DF410029601E /* libiconv.2.4.0.dylib */; };
 		A4E6BEE81802DF740029601E /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6BEE71802DF740029601E /* libz.1.2.5.dylib */; };
-		A4E6BEEB1802EB500029601E /* Demuxer.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E6BEEA1802EB500029601E /* Demuxer.m */; };
+		A4E6BEEB1802EB500029601E /* Transcoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E6BEEA1802EB500029601E /* Transcoder.m */; };
 		A4E6BEED1802F26D0029601E /* libbz2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6BEEC1802F26D0029601E /* libbz2.1.0.dylib */; };
 		A4E6BEF31802F5E50029601E /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E6BEF21802F5E50029601E /* NSData+Hex.m */; };
 /* End PBXBuildFile section */
@@ -46,7 +47,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				A4554DC817FDC2BD005780ED /* FFmpegWrapper.h in CopyFiles */,
+				A4554DC817FDC2BD005780ED /* FFmpeg.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,27 +57,29 @@
 		A4554DBF17FDC2BD005780ED /* libffmpeg-wrapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libffmpeg-wrapper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4554DC217FDC2BD005780ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4554DC617FDC2BD005780ED /* ffmpeg-wrapper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ffmpeg-wrapper-Prefix.pch"; sourceTree = "<group>"; };
-		A4554DC717FDC2BD005780ED /* FFmpegWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFmpegWrapper.h; sourceTree = "<group>"; };
-		A4554DC917FDC2BD005780ED /* FFmpegWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFmpegWrapper.m; sourceTree = "<group>"; };
+		A4554DC717FDC2BD005780ED /* FFmpeg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFmpeg.h; sourceTree = "<group>"; };
+		A4554DC917FDC2BD005780ED /* FFmpeg.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFmpeg.m; sourceTree = "<group>"; };
 		A4554DCF17FDC2BD005780ED /* ffmpeg-wrapperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ffmpeg-wrapperTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4554DD017FDC2BD005780ED /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A4554DD317FDC2BE005780ED /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		A4554DDA17FDC2BE005780ED /* ffmpeg-wrapperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ffmpeg-wrapperTests-Info.plist"; sourceTree = "<group>"; };
 		A4554DDC17FDC2BE005780ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4554DDE17FDC2BE005780ED /* FFmpegWrapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFmpegWrapperTests.m; sourceTree = "<group>"; };
-		A4AD359A1802FA12002315B2 /* Muxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Muxer.h; sourceTree = "<group>"; };
-		A4AD359B1802FA12002315B2 /* Muxer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Muxer.m; sourceTree = "<group>"; };
 		A4AD359D1802FE99002315B2 /* InputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputStream.h; sourceTree = "<group>"; };
 		A4AD359E1802FE99002315B2 /* InputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputStream.m; sourceTree = "<group>"; };
 		A4AD35A018030386002315B2 /* OutputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputStream.h; sourceTree = "<group>"; };
 		A4AD35A118030386002315B2 /* OutputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputStream.m; sourceTree = "<group>"; };
+		A4AD35A318041692002315B2 /* InputFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputFile.h; sourceTree = "<group>"; };
+		A4AD35A418041692002315B2 /* InputFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputFile.m; sourceTree = "<group>"; };
+		A4AD35A6180423C1002315B2 /* OutputFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputFile.h; sourceTree = "<group>"; };
+		A4AD35A7180423C1002315B2 /* OutputFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputFile.m; sourceTree = "<group>"; };
 		A4E6BEDE1802DEE00029601E /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = "ffmpeg-iOS/lib/libavformat.a"; sourceTree = "<group>"; };
 		A4E6BEE01802DF160029601E /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = "ffmpeg-iOS/lib/libavutil.a"; sourceTree = "<group>"; };
 		A4E6BEE21802DF2C0029601E /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = "ffmpeg-iOS/lib/libavcodec.a"; sourceTree = "<group>"; };
 		A4E6BEE41802DF410029601E /* libiconv.2.4.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.4.0.dylib; path = usr/lib/libiconv.2.4.0.dylib; sourceTree = SDKROOT; };
 		A4E6BEE71802DF740029601E /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		A4E6BEE91802EB500029601E /* Demuxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demuxer.h; sourceTree = "<group>"; };
-		A4E6BEEA1802EB500029601E /* Demuxer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demuxer.m; sourceTree = "<group>"; };
+		A4E6BEE91802EB500029601E /* Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transcoder.h; sourceTree = "<group>"; };
+		A4E6BEEA1802EB500029601E /* Transcoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transcoder.m; sourceTree = "<group>"; };
 		A4E6BEEC1802F26D0029601E /* libbz2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.1.0.dylib; path = usr/lib/libbz2.1.0.dylib; sourceTree = SDKROOT; };
 		A4E6BEF11802F5E50029601E /* NSData+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Hex.h"; path = "../ffmpeg-wrapper/NSData+Hex.h"; sourceTree = "<group>"; };
 		A4E6BEF21802F5E50029601E /* NSData+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Hex.m"; path = "../ffmpeg-wrapper/NSData+Hex.m"; sourceTree = "<group>"; };
@@ -149,17 +152,19 @@
 		A4554DC417FDC2BD005780ED /* ffmpeg-wrapper */ = {
 			isa = PBXGroup;
 			children = (
-				A4554DC717FDC2BD005780ED /* FFmpegWrapper.h */,
-				A4554DC917FDC2BD005780ED /* FFmpegWrapper.m */,
 				A4554DC517FDC2BD005780ED /* Supporting Files */,
-				A4E6BEE91802EB500029601E /* Demuxer.h */,
-				A4E6BEEA1802EB500029601E /* Demuxer.m */,
-				A4AD359A1802FA12002315B2 /* Muxer.h */,
-				A4AD359B1802FA12002315B2 /* Muxer.m */,
+				A4554DC717FDC2BD005780ED /* FFmpeg.h */,
+				A4554DC917FDC2BD005780ED /* FFmpeg.m */,
+				A4E6BEE91802EB500029601E /* Transcoder.h */,
+				A4E6BEEA1802EB500029601E /* Transcoder.m */,
 				A4AD359D1802FE99002315B2 /* InputStream.h */,
 				A4AD359E1802FE99002315B2 /* InputStream.m */,
 				A4AD35A018030386002315B2 /* OutputStream.h */,
 				A4AD35A118030386002315B2 /* OutputStream.m */,
+				A4AD35A318041692002315B2 /* InputFile.h */,
+				A4AD35A418041692002315B2 /* InputFile.m */,
+				A4AD35A6180423C1002315B2 /* OutputFile.h */,
+				A4AD35A7180423C1002315B2 /* OutputFile.m */,
 			);
 			path = "ffmpeg-wrapper";
 			sourceTree = "<group>";
@@ -273,12 +278,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4AD35A8180423C1002315B2 /* OutputFile.m in Sources */,
 				A4E6BEF31802F5E50029601E /* NSData+Hex.m in Sources */,
-				A4E6BEEB1802EB500029601E /* Demuxer.m in Sources */,
+				A4E6BEEB1802EB500029601E /* Transcoder.m in Sources */,
 				A4AD35A218030386002315B2 /* OutputStream.m in Sources */,
 				A4AD359F1802FE99002315B2 /* InputStream.m in Sources */,
-				A4554DCA17FDC2BD005780ED /* FFmpegWrapper.m in Sources */,
-				A4AD359C1802FA12002315B2 /* Muxer.m in Sources */,
+				A4AD35A518041692002315B2 /* InputFile.m in Sources */,
+				A4554DCA17FDC2BD005780ED /* FFmpeg.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

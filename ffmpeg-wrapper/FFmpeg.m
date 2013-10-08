@@ -1,24 +1,23 @@
 //
-//  FFmpegWrapper.m
-//  FFmpegWrapper
+//  FFmpeg.m
+//  FFmpeg
 //
 //  Created by Min Kim on 10/3/13.
 //  Copyright (c) 2013 iFactory Lab Limited. All rights reserved.
 //
 
-#import "FFmpegWrapper.h"
+#import "FFmpeg.h"
 #import "libavformat/avformat.h"
 
 #import "InputStream.h"
 #import "OutputStream.h"
-#import "Demuxer.h"
-#import "Muxer.h"
+#import "Transcoder.h"
 
 NSString const* kMovieUnknown = @"UNKNOWN";
 NSString const* kMovieMpeg4 = @"MP4";
 NSString const* kMovieFLV = @"FLV";
 
-@interface FFmpegWrapper () {
+@interface FFmpeg () {
   
 }
 
@@ -28,7 +27,7 @@ NSString const* kMovieFLV = @"FLV";
 
 @end
 
-@implementation FFmpegWrapper
+@implementation FFmpeg
 
 @synthesize inputFile;
 @synthesize inputFormat;
@@ -128,11 +127,14 @@ void av_log_callback(void *opaque, int format, const char *str, va_list va) {
   //  [self registerDemuxer:inputFormat];
   //  [self registerMuxer:outputFormat];
   av_register_all();
- 
-  Demuxer *demuxer = [[Demuxer alloc] init];
-  [demuxer openInputFile:inputFile];
+   
+  Transcoder *transcoder = [[Transcoder alloc] init];
+  [transcoder openInputFile:inputFile];
+  [transcoder openOutputFile:outputFile
+         withVideoCodec:(videoCodec == nil ? @"copy" : videoCodec)
+             audioCodec:(audioCodec == nil ? @"copy" : audioCodec)];
+  [transcoder transcodeInit];
   
-  // Muxer *muxer = [[Muxer alloc] init];
  /*
   [demuxer readFrame:^(AVPacket *packet) {
     
