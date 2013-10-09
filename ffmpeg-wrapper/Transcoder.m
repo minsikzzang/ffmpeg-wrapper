@@ -23,6 +23,8 @@
 - (int)processInput:(NSInteger)fileIndex;
 - (int)gotEagain;
 - (void)resetEagain;
+- (int)transcodeInit:(NSString **)error;
+- (int)transcodeStep;
 
 @end
 
@@ -78,7 +80,7 @@
   [outputFile linkWithInputStreams:inputFile.inputStreams];
 }
 
-- (BOOL)transcodeInit {
+- (int)transcodeInit:(NSString **)error {
   // Do we need to initialize framerate emulation? if so, see line 2108 in
   // ffmpeg.c
   
@@ -86,15 +88,19 @@
   // If there is no stream exist in the output file
   if (![outputFile hasStream]) {
     [outputFile dumpFormat:0];
-    NSLog(@"Output file #%d does not contain any stream\n", 0);
-    return NO;
+    *error = [NSString stringWithFormat:@"Output file #%d does not contain "
+              @"any stream", 0];
+    return AVERROR(EINVAL);
   }
   
+  int ret = 0;
+  
   // Compute the right encoding parameters for each output streams
-  if (![outputFile getEncodingParams:0]) {
+  ret = [outputFile getEncodingParams:0];
+  if (ret != 0) {
     // Let users know we failed....
     NSLog(@"Failed to compute encoding parameters");
-    return NO;
+    return ret;
   }
   
   // Init input streams
@@ -105,19 +111,21 @@
   
   // Open files and write file headers
   // oc->interrupt_callback = int_cb;
-  NSString *error = nil;
-  [outputFile writeHeader:&error];
-  if (error) {
-    NSLog(@"Could not write header for output file %@ "
-          @"(incorrect codec parameters ?): %@", outputFile.fileName, error);
-    return NO;
+  NSString *err = nil;
+  ret = [outputFile writeHeader:&err];
+  if (err) {
+    *error =
+        [NSString stringWithFormat:@"Could not write header for output file %@ "
+                                   @"(incorrect codec parameters ?): %@",
+          outputFile.fileName, err];
+    return ret;
   }
   
   [outputFile dumpFormat:0];
   [outputFile dumpOutputStreams];
   
   // We are ready to go....
-  return YES;
+  return 0;
 }
 
 - (int)gotEagain {
@@ -316,14 +324,33 @@ discard_packet:
   return ostMin;
 }
 
-- (void)transcode {
-  if (![self transcodeInit]) {
+static NSString * const kFFmpegError = @"kFFmpegError";
+static NSString * const kFFmpegErrorDomain = @"org.ffmpeg";
+
+- (NSError *)createNSError:(int)errorNum errorString:(NSString *)errorString {
+  NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:1];
+  if (errorString) {
+    [userInfo setObject:errorString forKey:NSLocalizedDescriptionKey];
+  } else {
+    [userInfo setObject:@"Unknown ffmpeg error" forKey:NSLocalizedDescriptionKey];
+  }
+  
+  [userInfo setObject:@(errorNum) forKey:kFFmpegError];
+  return [NSError errorWithDomain:kFFmpegErrorDomain
+                             code:errorNum
+                         userInfo:userInfo];
+}
+
+- (int)transcode:(NSError **)nsError {
+  NSString *error = nil;
+  int ret = [self transcodeInit:&error];
+  if (ret != 0) {
     // call failure block....
-    return;
+    *nsError = [self createNSError:ret errorString:error];
+    return ret;
   }
   
   // int64_t startTime = av_gettime();
-  int ret = 0;
   while (true) {
     // check if there's any stream where output is still needed
     if (![outputFile needOutput]) {
@@ -363,6 +390,7 @@ discard_packet:
   // see line 1117 in ffmpeg.c
   
   [outputFile cleanUp];
+  return 0;
 }
 
 @end

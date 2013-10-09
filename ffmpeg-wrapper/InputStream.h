@@ -46,6 +46,5 @@
 
 - (id)initWithStream:(AVStream *)stream;
 - (int)guessInputChannelLayout;
-- (void)closeStream;
 
 @end

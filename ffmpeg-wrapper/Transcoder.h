@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "libavformat/avformat.h"
 
-typedef void (^readHandler)(AVPacket *packet);
-
 @interface Transcoder : NSObject
 
 /*
@@ -22,8 +20,6 @@ typedef void (^readHandler)(AVPacket *packet);
 - (void)openOutputFile:(NSString *)file
         withVideoCodec:(NSString *)videoCodec
             audioCodec:(NSString *)audioCodec;
-- (BOOL)transcodeInit;
-- (int)transcodeStep;
-- (void)transcode;
+- (int)transcode:(NSError **)nsError;
 
 @end

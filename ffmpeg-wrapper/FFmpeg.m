@@ -18,8 +18,11 @@ NSString const* kMovieUnknown = @"UNKNOWN";
 NSString const* kMovieMpeg4 = @"MP4";
 NSString const* kMovieFLV = @"FLV";
 
+const char* kTranscodingQueue = "com.ifactorylab.ffmpeg.transcodeing.queue";
+
 @interface FFmpeg () {
-  
+  dispatch_queue_t transcodingQueue;
+  dispatch_queue_t mainThreadQueue;
 }
 
 - (const NSString *)getFileFormat:(NSString *)filePath;
@@ -64,7 +67,9 @@ void av_log_callback(void *opaque, int format, const char *str, va_list va) {
   self = [super init];
   if (self != nil) {
     // av_log_set_callback(av_log_callback);
-    av_log_set_level(AV_LOG_DEBUG);    
+    av_log_set_level(AV_LOG_DEBUG);
+    transcodingQueue = dispatch_queue_create(kTranscodingQueue, NULL);
+    mainThreadQueue = dispatch_get_main_queue();
   }
   return self;
 }
@@ -104,7 +109,8 @@ void av_log_callback(void *opaque, int format, const char *str, va_list va) {
   }
 }
 
-- (void)run {
+- (void)run:(FFmpegProgressBlock)pregressBlock
+completionBlock:(FFmpegCompletioBlock)completionBlock {
   // input and output should be present
   if (inputFile == nil || outputFile == nil) {
     NSLog(@"Both input and ouput should be present");
@@ -132,9 +138,22 @@ void av_log_callback(void *opaque, int format, const char *str, va_list va) {
   Transcoder *transcoder = [[Transcoder alloc] init];
   [transcoder openInputFile:inputFile];
   [transcoder openOutputFile:outputFile
-         withVideoCodec:(videoCodec == nil ? @"copy" : videoCodec)
-             audioCodec:(audioCodec == nil ? @"copy" : audioCodec)];
-  [transcoder transcode];  
+              withVideoCodec:(videoCodec == nil ? @"copy" : videoCodec)
+                  audioCodec:(audioCodec == nil ? @"copy" : audioCodec)];
+  
+  dispatch_async(transcodingQueue, ^{
+    NSError *error = nil;
+    if ([transcoder transcode:&error] != 0) {
+      if (completionBlock) {
+        completionBlock(NO, error);
+      }
+    } else {
+      if (completionBlock) {
+        completionBlock(YES, nil);
+      }
+    }
+    [transcoder release];
+  });
 }
 
 @end

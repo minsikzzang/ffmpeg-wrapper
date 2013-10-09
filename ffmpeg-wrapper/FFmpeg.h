@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^FFmpegCompletioBlock)(BOOL success, NSError *error);
+typedef void (^FFmpegProgressBlock)(void);
+
 extern NSString const* kMovieUnknown;
 extern NSString const* kMovieMpeg4;
 extern NSString const* kMovieFLV;
@@ -23,6 +26,7 @@ extern NSString const* kMovieFLV;
 @property (atomic, assign) int width;
 @property (atomic, assign) int height;
 
-- (void)run;
+- (void)run:(FFmpegProgressBlock)pregressBlock
+completionBlock:(FFmpegCompletioBlock)completionBlock;
 
 @end

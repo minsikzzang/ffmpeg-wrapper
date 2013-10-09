@@ -25,10 +25,10 @@
 
 - (BOOL)openFile:(NSString *)file;
 - (void)linkWithInputStreams:(NSArray *)inputStreams;
-- (BOOL)getEncodingParams:(int)copyTB;
+- (int)getEncodingParams:(int)copyTB;
 - (void)closeCodecs;
 - (void)dumpOutputStreams;
-- (void)writeHeader:(NSString **)error;
+- (int)writeHeader:(NSString **)error;
 - (void)writeTrailer;
 - (void)dumpFormat:(NSInteger)index;
 - (BOOL)hasStream;

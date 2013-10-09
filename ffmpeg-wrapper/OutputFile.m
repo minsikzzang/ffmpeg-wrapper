@@ -173,7 +173,7 @@
   }
 }
 
-- (BOOL)getEncodingParams:(int)copyTB {
+- (int)getEncodingParams:(int)copyTB {
   InputStream *ist = NULL;
   AVCodecContext *codec = NULL;
   int audioVolume = 256;
@@ -197,7 +197,7 @@
           (uint64_t)icodec->extradata_size + FF_INPUT_BUFFER_PADDING_SIZE;
       
       if (extraSize > INT_MAX) {
-        return NO;
+        return AVERROR(EINVAL);
       }
       
       // We're copying stream, no need to decode
@@ -224,7 +224,7 @@
       codec->field_order    = icodec->field_order;
       codec->extradata      = av_mallocz((size_t)extraSize);
       if (!codec->extradata) {
-        return NO;
+        return AVERROR(ENOMEM);
       }
       memcpy(codec->extradata, icodec->extradata, icodec->extradata_size);
       codec->extradata_size= icodec->extradata_size;
@@ -299,7 +299,7 @@
         case AVMEDIA_TYPE_AUDIO:
           if (audioVolume != 256) {
             NSLog(@"-acodec copy and -vol are incompatible(frames are not decoded)");
-            return NO;
+            return -1;
           }
           codec->channel_layout     = icodec->channel_layout;
           codec->sample_rate        = icodec->sample_rate;
@@ -349,7 +349,7 @@
           break;
           
         default:
-          return NO;
+          return -1;
       }
     } else {
       // I won't implement this case, if you want, please see line 2284 in
@@ -357,7 +357,7 @@
     }
   }
   
-  return YES;
+  return 0;
 }
 
 - (void)closeCodecs {
@@ -380,13 +380,14 @@
   av_write_trailer(context);
 }
 
-- (void)writeHeader:(NSString **)error {
+- (int)writeHeader:(NSString **)error {
   int ret = 0;
   if ((ret = avformat_write_header(context, 0)) < 0) {
     char errbuf[128];
     av_strerror(ret, errbuf, sizeof(errbuf));
     *error = [NSString stringWithFormat:@"%s", errbuf];
   }
+  return ret;
 }
 
 - (BOOL)hasStream {
