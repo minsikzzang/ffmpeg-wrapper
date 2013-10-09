@@ -23,14 +23,29 @@
 @property (atomic, assign) NSInteger resampleChannels;
 @property (atomic, assign) uint64_t resampleChannelLayout;
 @property (atomic, assign) NSInteger discard;
-/* video only */
+// true if the packets must be decoded in 'raw_fifo'
+@property (atomic, assign)  int decodingNeeded;
+
+// video only
 @property (atomic, assign) AVRational frameRate;
 
-@property (atomic, assign) uint64_t nextPts;
-@property (atomic, assign) uint64_t nextDts;
-@property (atomic, assign) int isStart; /* is 1 at the start and after a discontinuity */
+// is 1 at the start and after a discontinuity
+@property (atomic, assign) NSInteger isStart;
+@property (atomic, assign) NSInteger wrapCorrectionDone;
+@property (atomic, assign) double tsScale;
+@property (atomic, assign) NSInteger sawFirstTs;
+
+// synthetic pts for the next decode frame (in AV_TIME_BASE units)
+@property (atomic, assign) int64_t nextPts;
+// current pts of the decoded frame  (in AV_TIME_BASE units)
+@property (atomic, assign) int64_t pts;
+@property (atomic, assign) int64_t nextDts;
+// dts of the last packet read for this stream (in AV_TIME_BASE units)
+@property (atomic, assign) int64_t dts;
+@property (atomic, assign) int64_t filterInRescaleDeltaLast;
 
 - (id)initWithStream:(AVStream *)stream;
 - (int)guessInputChannelLayout;
+- (void)closeStream;
 
 @end

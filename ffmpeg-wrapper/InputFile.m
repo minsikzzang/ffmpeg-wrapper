@@ -23,12 +23,18 @@
 @synthesize context;
 @synthesize istIndex;
 @synthesize inputStreams;
+@synthesize eAgain;
+@synthesize eofReached;
+@synthesize tsOffset;
+@synthesize lastTs;
+@synthesize startTime;
 
 - (id)init {
   self = [super init];
   if (self != nil) {
     inputStreams = [[NSMutableArray alloc] init];
     context = 0;
+    startTime = 0;
   }
   return self;
 }
@@ -61,7 +67,7 @@
   
   istIndex = inputStreams.count - context->nb_streams;
   nbStreams = context->nb_streams;
-
+   
   return YES;
 }
 
@@ -75,9 +81,10 @@
 
 - (BOOL)initStreams {
   for (InputStream *ist in inputStreams) {
-    /*
-     // We don't need decode...
-    if (ist.decoding_needed) {
+    if (ist.decodingNeeded) {
+      /*
+       // We don't need decode, so we're not implementing it yet
+
       AVCodec *codec = ist->dec;
       if (!codec) {
         snprintf(error, error_len, "Decoder (codec %s) not found for input stream #%d:%d",
@@ -103,8 +110,9 @@
         return ret;
       }
       assert_avoptions(ist->opts);
+       */
     }
-    */
+
     ist.nextPts = AV_NOPTS_VALUE;
     ist.nextDts = AV_NOPTS_VALUE;
     ist.isStart = 1;
@@ -113,5 +121,24 @@
   return YES;
 }
 
+- (int)getInputPacket:(AVPacket *)pkt {
+  /*
+  if (f->rate_emu) {
+    int i;
+    for (i = 0; i < f->nb_streams; i++) {
+      InputStream *ist = input_streams[f->ist_index + i];
+      int64_t pts = av_rescale(ist->dts, 1000000, AV_TIME_BASE);
+      int64_t now = av_gettime() - ist->start;
+      if (pts > now)
+        return AVERROR(EAGAIN);
+    }
+  }
+   */
+  return av_read_frame(context, pkt);
+}
+
+- (void)closeFile {
+  avformat_close_input(&context);
+}
 
 @end

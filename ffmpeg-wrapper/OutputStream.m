@@ -37,6 +37,11 @@
 @synthesize inputStream;
 @synthesize frameRate;
 @synthesize frameAspectRatio;
+@synthesize unAvailable;
+@synthesize finished;
+@synthesize encodingNeeded;
+@synthesize frameNumber;
+@synthesize copyPriorStart;
 
 + (OutputStream *)newOutputStream:(AVFormatContext *)context
                              type:(enum AVMediaType)type
@@ -109,6 +114,8 @@
   self = [super init];
   if (self != nil) {
     self.stream = aStream;
+    encodingNeeded = 0;
+    copyPriorStart = -1;
   }
   return self;
 }
@@ -132,6 +139,31 @@
     codec = avcodec_find_encoder(stream->codec->codec_id);
     stream->codec->codec_id = codec->id;
   }
+}
+
+- (void)dumpStream {
+  av_log(NULL, AV_LOG_INFO, "  Stream #%d:%d -> #%d:%d",
+         inputStream.fileIndex,
+         inputStream.stream->index,
+         fileIndex,
+         index);
+  
+  if (streamCopy) {
+    av_log(NULL, AV_LOG_INFO, " (copy)");
+  } else {
+    av_log(NULL, AV_LOG_INFO, " (%s -> %s)", inputStream.codec ?
+           inputStream.codec->name : "?",
+           codec ? codec->name : "?");
+  }
+  av_log(NULL, AV_LOG_INFO, "\n");
+}
+
+- (void)closeStream {
+  finished = 1;
+}
+
+- (void)closeCodec {
+  avcodec_close(stream->codec);
 }
 
 @end

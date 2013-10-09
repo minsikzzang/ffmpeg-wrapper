@@ -35,6 +35,13 @@
 @synthesize nextDts;
 @synthesize nextPts;
 @synthesize isStart;
+@synthesize wrapCorrectionDone;
+@synthesize tsScale;
+@synthesize sawFirstTs;
+@synthesize decodingNeeded;
+@synthesize dts;
+@synthesize pts;
+@synthesize filterInRescaleDeltaLast;
 
 - (id)initWithStream:(AVStream *)aStream {
   self = [super init];
@@ -44,6 +51,11 @@
     
     // We only support single input at the moment, it is always 0 now
     fileIndex = 0;
+    discard = 1;
+    stream->discard = AVDISCARD_ALL;
+    tsScale = 1.0;
+    decodingNeeded = 0;
+    
     codec = [self chooseDecoder];
     
     switch (dec->codec_type) {
@@ -103,6 +115,5 @@
   }
   return 1;
 }
-
 
 @end

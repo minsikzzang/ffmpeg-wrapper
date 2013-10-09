@@ -20,6 +20,9 @@
 		A4AD35A218030386002315B2 /* OutputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AD35A118030386002315B2 /* OutputStream.m */; };
 		A4AD35A518041692002315B2 /* InputFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AD35A418041692002315B2 /* InputFile.m */; };
 		A4AD35A8180423C1002315B2 /* OutputFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AD35A7180423C1002315B2 /* OutputFile.m */; };
+		A4C3137018057FEA00A670E7 /* librtmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4AD4ADF18057F9A002315B2 /* librtmp.a */; };
+		A4C3137118057FEA00A670E7 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4AD4AE018057F9A002315B2 /* libcrypto.a */; };
+		A4C3137218057FEA00A670E7 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4AD4AE118057F9A002315B2 /* libssl.a */; };
 		A4E6BEDF1802DEE00029601E /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6BEDE1802DEE00029601E /* libavformat.a */; };
 		A4E6BEE11802DF160029601E /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6BEE01802DF160029601E /* libavutil.a */; };
 		A4E6BEE31802DF2C0029601E /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6BEE21802DF2C0029601E /* libavcodec.a */; };
@@ -73,6 +76,9 @@
 		A4AD35A418041692002315B2 /* InputFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputFile.m; sourceTree = "<group>"; };
 		A4AD35A6180423C1002315B2 /* OutputFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputFile.h; sourceTree = "<group>"; };
 		A4AD35A7180423C1002315B2 /* OutputFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputFile.m; sourceTree = "<group>"; };
+		A4AD4ADF18057F9A002315B2 /* librtmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtmp.a; path = "../librtmp-iOS/lib/librtmp.a"; sourceTree = "<group>"; };
+		A4AD4AE018057F9A002315B2 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "../librtmp-iOS/lib/libcrypto.a"; sourceTree = "<group>"; };
+		A4AD4AE118057F9A002315B2 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "../librtmp-iOS/lib/libssl.a"; sourceTree = "<group>"; };
 		A4E6BEDE1802DEE00029601E /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = "ffmpeg-iOS/lib/libavformat.a"; sourceTree = "<group>"; };
 		A4E6BEE01802DF160029601E /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = "ffmpeg-iOS/lib/libavutil.a"; sourceTree = "<group>"; };
 		A4E6BEE21802DF2C0029601E /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = "ffmpeg-iOS/lib/libavcodec.a"; sourceTree = "<group>"; };
@@ -101,6 +107,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4C3137018057FEA00A670E7 /* librtmp.a in Frameworks */,
+				A4C3137118057FEA00A670E7 /* libcrypto.a in Frameworks */,
+				A4C3137218057FEA00A670E7 /* libssl.a in Frameworks */,
 				A4E6BEED1802F26D0029601E /* libbz2.1.0.dylib in Frameworks */,
 				A4E6BEE81802DF740029601E /* libz.1.2.5.dylib in Frameworks */,
 				A4E6BEE61802DF6F0029601E /* libiconv.2.4.0.dylib in Frameworks */,
@@ -136,6 +145,9 @@
 		A4554DC117FDC2BD005780ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4AD4ADF18057F9A002315B2 /* librtmp.a */,
+				A4AD4AE018057F9A002315B2 /* libcrypto.a */,
+				A4AD4AE118057F9A002315B2 /* libssl.a */,
 				A4E6BEEC1802F26D0029601E /* libbz2.1.0.dylib */,
 				A4E6BEE71802DF740029601E /* libz.1.2.5.dylib */,
 				A4E6BEE41802DF410029601E /* libiconv.2.4.0.dylib */,
@@ -448,7 +460,16 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/livestation/benchmarks/librtmp-iOS/include",
+				);
 				INFOPLIST_FILE = "ffmpeg-wrapperTests/ffmpeg-wrapperTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/livestation/benchmarks/librtmp-iOS/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -466,7 +487,16 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ffmpeg-wrapper/ffmpeg-wrapper-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/livestation/benchmarks/librtmp-iOS/include",
+				);
 				INFOPLIST_FILE = "ffmpeg-wrapperTests/ffmpeg-wrapperTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/livestation/benchmarks/librtmp-iOS/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};

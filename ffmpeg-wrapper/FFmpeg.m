@@ -8,6 +8,7 @@
 
 #import "FFmpeg.h"
 #import "libavformat/avformat.h"
+#import "libavutil/time.h"
 
 #import "InputStream.h"
 #import "OutputStream.h"
@@ -133,20 +134,7 @@ void av_log_callback(void *opaque, int format, const char *str, va_list va) {
   [transcoder openOutputFile:outputFile
          withVideoCodec:(videoCodec == nil ? @"copy" : videoCodec)
              audioCodec:(audioCodec == nil ? @"copy" : audioCodec)];
-  [transcoder transcodeInit];
-  
- /*
-  [demuxer readFrame:^(AVPacket *packet) {
-    
-  }];
-  */
-  /*
-  InputStream *input = [[InputStream alloc] init];
-  [input openInputFile:inputFile];
-  
-  OutputStream *output = [[OutputStream alloc] init];
-  [output openOutputFile:outputFile];
-  */
+  [transcoder transcode];  
 }
 
 @end

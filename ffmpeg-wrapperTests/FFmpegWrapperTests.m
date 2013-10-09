@@ -8,6 +8,8 @@
 
 #import <XCTest/XCTest.h>
 #import "FFmpeg.h"
+#import <librtmp/rtmp.h>
+#import <librtmp/log.h>
 
 @interface FFmpegWrapperTests : XCTestCase
 
@@ -53,8 +55,35 @@ NSString const* kSourceMP4 = @"http://bcn01.livestation.com/test.mp4";
   FFmpeg *ffmpeg = [[FFmpeg alloc] init];
   ffmpeg.inputFile = mp4Path;
   ffmpeg.outputFile = flvPath;
+  ffmpeg.videoCodec = @"copy";
+  ffmpeg.audioCodec = @"copy";
   [ffmpeg run];
   
+  RTMP *r = RTMP_Alloc();
+  RTMP_LogSetLevel(RTMP_LOGALL);
+  RTMP_LogCallback(rtmpLog);
+  
+  RTMP_Init(r);
+  if (!RTMP_SetupURL(r, "rtmp://media20.lsops.net/live/test")) {
+    return;
+  }
+  
+  RTMP_EnableWrite(r);
+  
+  if (!RTMP_Connect(r, NULL) || !RTMP_ConnectStream(r, 0)) {
+    return;
+  }
+  
+  NSData *data = [NSData dataWithContentsOfFile:flvPath];
+  NSLog(@"output data size: %d", [data length]);
+  
+  RTMP_Write(r, [data bytes], [data length]);
+  
+  for (int ii = 0; ii < 100; ii++) {
+    sleep(1);
+  }
+
+
   /**
    
   ffmpeg.input = mp4Path;

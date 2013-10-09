@@ -24,13 +24,28 @@
 @property (atomic, assign) uint64_t lastMuxDts;
 @property (atomic, assign) enum AVMediaType mediaType;
 @property (atomic, assign) InputStream *inputStream;
-/* video only */
+
+// video only
 @property (atomic, assign) AVRational frameRate;
 @property (atomic, assign) AVRational frameAspectRatio;
+
+// true if the steram is unavailable (possibly temporarily)
+@property (atomic, assign) NSInteger unAvailable;
+
+// no more packets should be written for this stream
+@property (atomic, assign) NSInteger finished;
+
+// true if encoding needed for this stream 
+@property (atomic, assign) NSInteger encodingNeeded;
+@property (atomic, assign) NSInteger frameNumber;
+@property (atomic, assign) NSInteger copyPriorStart;
 
 + (OutputStream *)newVideoStream:(AVFormatContext *)context
                        codecName:(NSString *)codecName;
 + (OutputStream *)newAudioStream:(AVFormatContext *)context
                        codecName:(NSString *)codecName;
+- (void)dumpStream;
+- (void)closeStream;
+- (void)closeCodec;
 
 @end

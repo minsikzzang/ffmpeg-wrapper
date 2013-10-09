@@ -13,14 +13,17 @@ typedef void (^readHandler)(AVPacket *packet);
 
 @interface Transcoder : NSObject
 
+/*
 @property (atomic, retain) NSMutableArray *inputFiles;
 @property (atomic, retain) NSMutableArray *outputFiles;
+*/
 
 - (void)openInputFile:(NSString *)file;
 - (void)openOutputFile:(NSString *)file
         withVideoCodec:(NSString *)videoCodec
             audioCodec:(NSString *)audioCodec;
 - (BOOL)transcodeInit;
-- (void)readFrame:(readHandler)readHandler;
+- (int)transcodeStep;
+- (void)transcode;
 
 @end
