@@ -53,6 +53,8 @@
 - (BOOL)openFile:(NSString *)file {
   self.fileName = file;
   
+  [[NSFileManager defaultManager] removeItemAtPath:file error:nil];
+  
   const char *filename = [file cStringUsingEncoding:NSASCIIStringEncoding];
   
   // Allocate the output media context

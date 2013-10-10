@@ -349,7 +349,7 @@ static NSString * const kFFmpegErrorDomain = @"org.ffmpeg";
     *nsError = [self createNSError:ret errorString:error];
     return ret;
   }
-  
+
   // int64_t startTime = av_gettime();
   while (true) {
     // check if there's any stream where output is still needed
@@ -383,7 +383,7 @@ static NSString * const kFFmpegErrorDomain = @"org.ffmpeg";
   // }
   
   // write the trailer if needed and close file
-  [outputFile writeTrailer];
+  // [outputFile writeTrailer];
   
   // dump report by using the first video and audio streams
   // print_report(1, timer_start, av_gettime()); -> implement this later,
