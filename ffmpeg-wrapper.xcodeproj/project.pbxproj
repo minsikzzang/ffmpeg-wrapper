@@ -16,6 +16,20 @@
 		A4554DD717FDC2BE005780ED /* libffmpeg-wrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DBF17FDC2BD005780ED /* libffmpeg-wrapper.a */; };
 		A4554DDD17FDC2BE005780ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4554DDB17FDC2BE005780ED /* InfoPlist.strings */; };
 		A4554DDF17FDC2BE005780ED /* FFmpegWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4554DDE17FDC2BE005780ED /* FFmpegWrapperTests.m */; };
+		A49E24B8180EDC5E00C4B589 /* FLVWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24AD180EDC5E00C4B589 /* FLVWriter.m */; };
+		A49E24B9180EDC5E00C4B589 /* NSMutableData+Bytes.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24AF180EDC5E00C4B589 /* NSMutableData+Bytes.m */; };
+		A49E24BA180EDC5E00C4B589 /* NSData+Bytes.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24B1180EDC5E00C4B589 /* NSData+Bytes.m */; };
+		A49E24BB180EDC5E00C4B589 /* FLVHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24B2180EDC5E00C4B589 /* FLVHeader.m */; };
+		A49E24BC180EDC5E00C4B589 /* FLVMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24B4180EDC5E00C4B589 /* FLVMetadata.m */; };
+		A49E24BD180EDC5E00C4B589 /* FLVTag.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24B6180EDC5E00C4B589 /* FLVTag.m */; };
+		A49E24C1180EDCD300C4B589 /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24C0180EDCD300C4B589 /* NSData+Hex.m */; };
+		A49E24C2180EDD1300C4B589 /* NSMutableData+Bytes.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24AF180EDC5E00C4B589 /* NSMutableData+Bytes.m */; };
+		A49E24C3180EDD1300C4B589 /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24C0180EDCD300C4B589 /* NSData+Hex.m */; };
+		A49E24C4180EDD1300C4B589 /* FLVWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24AD180EDC5E00C4B589 /* FLVWriter.m */; };
+		A49E24C5180EDD1300C4B589 /* NSData+Bytes.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24B1180EDC5E00C4B589 /* NSData+Bytes.m */; };
+		A49E24C6180EDD1300C4B589 /* FLVHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24B2180EDC5E00C4B589 /* FLVHeader.m */; };
+		A49E24C7180EDD1300C4B589 /* FLVMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24B4180EDC5E00C4B589 /* FLVMetadata.m */; };
+		A49E24C8180EDD1300C4B589 /* FLVTag.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E24B6180EDC5E00C4B589 /* FLVTag.m */; };
 		A4AD359F1802FE99002315B2 /* InputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AD359E1802FE99002315B2 /* InputStream.m */; };
 		A4AD35A218030386002315B2 /* OutputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AD35A118030386002315B2 /* OutputStream.m */; };
 		A4AD35A518041692002315B2 /* InputFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AD35A418041692002315B2 /* InputFile.m */; };
@@ -30,7 +44,6 @@
 		A4E6BEE81802DF740029601E /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6BEE71802DF740029601E /* libz.1.2.5.dylib */; };
 		A4E6BEEB1802EB500029601E /* Transcoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E6BEEA1802EB500029601E /* Transcoder.m */; };
 		A4E6BEED1802F26D0029601E /* libbz2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6BEEC1802F26D0029601E /* libbz2.1.0.dylib */; };
-		A4E6BEF31802F5E50029601E /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E6BEF21802F5E50029601E /* NSData+Hex.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +81,20 @@
 		A4554DDA17FDC2BE005780ED /* ffmpeg-wrapperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ffmpeg-wrapperTests-Info.plist"; sourceTree = "<group>"; };
 		A4554DDC17FDC2BE005780ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4554DDE17FDC2BE005780ED /* FFmpegWrapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFmpegWrapperTests.m; sourceTree = "<group>"; };
+		A49E24AD180EDC5E00C4B589 /* FLVWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLVWriter.m; path = ../protos/FLVWriter.m; sourceTree = "<group>"; };
+		A49E24AE180EDC5E00C4B589 /* FLVWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLVWriter.h; path = ../protos/FLVWriter.h; sourceTree = "<group>"; };
+		A49E24AF180EDC5E00C4B589 /* NSMutableData+Bytes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableData+Bytes.m"; path = "../protos/NSMutableData+Bytes.m"; sourceTree = "<group>"; };
+		A49E24B0180EDC5E00C4B589 /* NSData+Bytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Bytes.h"; path = "../protos/NSData+Bytes.h"; sourceTree = "<group>"; };
+		A49E24B1180EDC5E00C4B589 /* NSData+Bytes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Bytes.m"; path = "../protos/NSData+Bytes.m"; sourceTree = "<group>"; };
+		A49E24B2180EDC5E00C4B589 /* FLVHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLVHeader.m; path = ../protos/FLVHeader.m; sourceTree = "<group>"; };
+		A49E24B3180EDC5E00C4B589 /* FLVMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLVMetadata.h; path = ../protos/FLVMetadata.h; sourceTree = "<group>"; };
+		A49E24B4180EDC5E00C4B589 /* FLVMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLVMetadata.m; path = ../protos/FLVMetadata.m; sourceTree = "<group>"; };
+		A49E24B5180EDC5E00C4B589 /* FLVTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLVTag.h; path = ../protos/FLVTag.h; sourceTree = "<group>"; };
+		A49E24B6180EDC5E00C4B589 /* FLVTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLVTag.m; path = ../protos/FLVTag.m; sourceTree = "<group>"; };
+		A49E24B7180EDC5E00C4B589 /* FLVHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLVHeader.h; path = ../protos/FLVHeader.h; sourceTree = "<group>"; };
+		A49E24BE180EDCD300C4B589 /* NSMutableData+Bytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableData+Bytes.h"; path = "../protos/NSMutableData+Bytes.h"; sourceTree = "<group>"; };
+		A49E24BF180EDCD300C4B589 /* NSData+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Hex.h"; path = "../protos/NSData+Hex.h"; sourceTree = "<group>"; };
+		A49E24C0180EDCD300C4B589 /* NSData+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Hex.m"; path = "../protos/NSData+Hex.m"; sourceTree = "<group>"; };
 		A4AD359D1802FE99002315B2 /* InputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputStream.h; sourceTree = "<group>"; };
 		A4AD359E1802FE99002315B2 /* InputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputStream.m; sourceTree = "<group>"; };
 		A4AD35A018030386002315B2 /* OutputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputStream.h; sourceTree = "<group>"; };
@@ -87,8 +114,6 @@
 		A4E6BEE91802EB500029601E /* Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transcoder.h; sourceTree = "<group>"; };
 		A4E6BEEA1802EB500029601E /* Transcoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transcoder.m; sourceTree = "<group>"; };
 		A4E6BEEC1802F26D0029601E /* libbz2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.1.0.dylib; path = usr/lib/libbz2.1.0.dylib; sourceTree = SDKROOT; };
-		A4E6BEF11802F5E50029601E /* NSData+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Hex.h"; path = "../ffmpeg-wrapper/NSData+Hex.h"; sourceTree = "<group>"; };
-		A4E6BEF21802F5E50029601E /* NSData+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Hex.m"; path = "../ffmpeg-wrapper/NSData+Hex.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +151,20 @@
 		A4554DB617FDC2BD005780ED = {
 			isa = PBXGroup;
 			children = (
+				A49E24BE180EDCD300C4B589 /* NSMutableData+Bytes.h */,
+				A49E24AF180EDC5E00C4B589 /* NSMutableData+Bytes.m */,
+				A49E24BF180EDCD300C4B589 /* NSData+Hex.h */,
+				A49E24C0180EDCD300C4B589 /* NSData+Hex.m */,
+				A49E24AD180EDC5E00C4B589 /* FLVWriter.m */,
+				A49E24AE180EDC5E00C4B589 /* FLVWriter.h */,
+				A49E24B0180EDC5E00C4B589 /* NSData+Bytes.h */,
+				A49E24B1180EDC5E00C4B589 /* NSData+Bytes.m */,
+				A49E24B2180EDC5E00C4B589 /* FLVHeader.m */,
+				A49E24B3180EDC5E00C4B589 /* FLVMetadata.h */,
+				A49E24B4180EDC5E00C4B589 /* FLVMetadata.m */,
+				A49E24B5180EDC5E00C4B589 /* FLVTag.h */,
+				A49E24B6180EDC5E00C4B589 /* FLVTag.m */,
+				A49E24B7180EDC5E00C4B589 /* FLVHeader.h */,
 				A4554DC417FDC2BD005780ED /* ffmpeg-wrapper */,
 				A4554DD817FDC2BE005780ED /* ffmpeg-wrapperTests */,
 				A4554DC117FDC2BD005780ED /* Frameworks */,
@@ -193,8 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				A4554DDE17FDC2BE005780ED /* FFmpegWrapperTests.m */,
-				A4E6BEF11802F5E50029601E /* NSData+Hex.h */,
-				A4E6BEF21802F5E50029601E /* NSData+Hex.m */,
 				A4554DD917FDC2BE005780ED /* Supporting Files */,
 			);
 			path = "ffmpeg-wrapperTests";
@@ -290,11 +327,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49E24BA180EDC5E00C4B589 /* NSData+Bytes.m in Sources */,
 				A4AD35A8180423C1002315B2 /* OutputFile.m in Sources */,
-				A4E6BEF31802F5E50029601E /* NSData+Hex.m in Sources */,
 				A4E6BEEB1802EB500029601E /* Transcoder.m in Sources */,
+				A49E24B8180EDC5E00C4B589 /* FLVWriter.m in Sources */,
+				A49E24BC180EDC5E00C4B589 /* FLVMetadata.m in Sources */,
 				A4AD35A218030386002315B2 /* OutputStream.m in Sources */,
+				A49E24BB180EDC5E00C4B589 /* FLVHeader.m in Sources */,
+				A49E24C1180EDCD300C4B589 /* NSData+Hex.m in Sources */,
 				A4AD359F1802FE99002315B2 /* InputStream.m in Sources */,
+				A49E24BD180EDC5E00C4B589 /* FLVTag.m in Sources */,
+				A49E24B9180EDC5E00C4B589 /* NSMutableData+Bytes.m in Sources */,
 				A4AD35A518041692002315B2 /* InputFile.m in Sources */,
 				A4554DCA17FDC2BD005780ED /* FFmpeg.m in Sources */,
 			);
@@ -304,6 +347,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49E24C2180EDD1300C4B589 /* NSMutableData+Bytes.m in Sources */,
+				A49E24C3180EDD1300C4B589 /* NSData+Hex.m in Sources */,
+				A49E24C4180EDD1300C4B589 /* FLVWriter.m in Sources */,
+				A49E24C5180EDD1300C4B589 /* NSData+Bytes.m in Sources */,
+				A49E24C6180EDD1300C4B589 /* FLVHeader.m in Sources */,
+				A49E24C7180EDD1300C4B589 /* FLVMetadata.m in Sources */,
+				A49E24C8180EDD1300C4B589 /* FLVTag.m in Sources */,
 				A4554DDF17FDC2BE005780ED /* FFmpegWrapperTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
