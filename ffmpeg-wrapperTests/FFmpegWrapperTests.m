@@ -136,7 +136,11 @@ NSString const* kSourceFLV = @"http://bcn01.livestation.com/test.flv";
         if (*(bytes + position + 1) == 1) {
           NSLog(@"NALU");
         } else {
-          NSLog(@"AVCc: %@", [[NSData dataWithBytes:bytes + position + 1 length:size - 1] hexString]);
+          NSLog(@"AVCc\n");
+          NSLog(@"FLAGS: %@", [[NSData dataWithBytes:bytes + position length:flagsSize] hexString]);
+          NSLog(@"TAG BODY%@", [[NSData dataWithBytesNoCopy:bytes + position + flagsSize
+                                                     length:size - flagsSize
+                                               freeWhenDone:NO] hexString]);
         }
         
         int ts = AMF_DecodeInt24(bytes + position + 2);
