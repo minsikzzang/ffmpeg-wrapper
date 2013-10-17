@@ -24,6 +24,7 @@
 @implementation FFmpegWrapperTests
 
 NSString const* kSourceMP4 = @"http://bcn01.livestation.com/test.mp4";
+NSString const* kSourceFLV = @"http://bcn01.livestation.com/test.flv";
 
 - (void)setUp {
   [super setUp];
@@ -180,10 +181,11 @@ NSString const* kSourceMP4 = @"http://bcn01.livestation.com/test.mp4";
   }
 }
 
+- (void)tryOne:(NSData *)mp4 flv:(NSData *)flv {
+  
+}
+
 - (void)testMpeg4toFlv {
-  // Download test mp4 file from test server
-  NSData *mp4 =
-    [NSData dataWithContentsOfURL:[NSURL URLWithString:(NSString *)kSourceMP4]];
   NSString *path = NSTemporaryDirectory();
   NSString *mp4Path = [path stringByAppendingPathComponent:@"test.mp4"];
   
@@ -201,15 +203,18 @@ NSString const* kSourceMP4 = @"http://bcn01.livestation.com/test.mp4";
 
   NSLog(@"mp4 data size: %d", [mp4 length]);
   NSLog(@"mp4 path %@, flv path %@", mp4Path, flvPath);
-  
+
+  // Download test mp4 file from test server
+  NSData *mp4 =[NSData dataWithContentsOfURL:[NSURL URLWithString:(NSString *)kSourceMP4]];
   NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:flvPath]];
   
   // NSLog(@"mp4%@", [mp4 hexString:10240]);
   // NSLog(@"flv%@", [data hexString:10240]);
   // NSLog(@"\n\nMP4\n\n");
   // [self parseMp4:[NSData dataWithBytes:[mp4 bytes] length:102400]];
-  NSLog(@"\n\nFLV\n\n");
-  [self parseFlv:[NSData dataWithBytes:[data bytes] length:204800]];
+  // NSLog(@"\n\nFLV\n\n");
+  // [self parseFlv:[NSData dataWithBytes:[data bytes] length:204800]];
+  [self tryOne:];
   return;
   
   RTMP *r = RTMP_Alloc();
