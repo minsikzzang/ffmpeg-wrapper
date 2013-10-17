@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93FB643818108F26008FD383 /* MP4Atom.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FB643118108F26008FD383 /* MP4Atom.m */; };
+		93FB643918108F26008FD383 /* MP4Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FB643318108F26008FD383 /* MP4Frame.m */; };
+		93FB643A18108F26008FD383 /* MP4Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FB643518108F26008FD383 /* MP4Reader.m */; };
+		93FB643B18108F26008FD383 /* MP4Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FB643718108F26008FD383 /* MP4Record.m */; };
 		A4554DC317FDC2BD005780ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4554DC217FDC2BD005780ED /* Foundation.framework */; };
 		A4554DC817FDC2BD005780ED /* FFmpeg.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4554DC717FDC2BD005780ED /* FFmpeg.h */; };
 		A4554DCA17FDC2BD005780ED /* FFmpeg.m in Sources */ = {isa = PBXBuildFile; fileRef = A4554DC917FDC2BD005780ED /* FFmpeg.m */; };
@@ -72,6 +76,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		93FB643018108F26008FD383 /* MP4Atom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MP4Atom.h; path = ../protos/MP4Atom.h; sourceTree = "<group>"; };
+		93FB643118108F26008FD383 /* MP4Atom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MP4Atom.m; path = ../protos/MP4Atom.m; sourceTree = "<group>"; };
+		93FB643218108F26008FD383 /* MP4Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MP4Frame.h; path = ../protos/MP4Frame.h; sourceTree = "<group>"; };
+		93FB643318108F26008FD383 /* MP4Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MP4Frame.m; path = ../protos/MP4Frame.m; sourceTree = "<group>"; };
+		93FB643418108F26008FD383 /* MP4Reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MP4Reader.h; path = ../protos/MP4Reader.h; sourceTree = "<group>"; };
+		93FB643518108F26008FD383 /* MP4Reader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MP4Reader.m; path = ../protos/MP4Reader.m; sourceTree = "<group>"; };
+		93FB643618108F26008FD383 /* MP4Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MP4Record.h; path = ../protos/MP4Record.h; sourceTree = "<group>"; };
+		93FB643718108F26008FD383 /* MP4Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MP4Record.m; path = ../protos/MP4Record.m; sourceTree = "<group>"; };
 		A4554DBF17FDC2BD005780ED /* libffmpeg-wrapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libffmpeg-wrapper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4554DC217FDC2BD005780ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4554DC617FDC2BD005780ED /* ffmpeg-wrapper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ffmpeg-wrapper-Prefix.pch"; sourceTree = "<group>"; };
@@ -155,6 +167,14 @@
 		A4554DB617FDC2BD005780ED = {
 			isa = PBXGroup;
 			children = (
+				93FB643018108F26008FD383 /* MP4Atom.h */,
+				93FB643118108F26008FD383 /* MP4Atom.m */,
+				93FB643218108F26008FD383 /* MP4Frame.h */,
+				93FB643318108F26008FD383 /* MP4Frame.m */,
+				93FB643418108F26008FD383 /* MP4Reader.h */,
+				93FB643518108F26008FD383 /* MP4Reader.m */,
+				93FB643618108F26008FD383 /* MP4Record.h */,
+				93FB643718108F26008FD383 /* MP4Record.m */,
 				A49E24C9180FF74500C4B589 /* NSMutableData+AMF.h */,
 				A49E24CA180FF74500C4B589 /* NSMutableData+AMF.m */,
 				A49E24BE180EDCD300C4B589 /* NSMutableData+Bytes.h */,
@@ -334,16 +354,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				A49E24BA180EDC5E00C4B589 /* NSData+Bytes.m in Sources */,
+				93FB643918108F26008FD383 /* MP4Frame.m in Sources */,
 				A4AD35A8180423C1002315B2 /* OutputFile.m in Sources */,
 				A4E6BEEB1802EB500029601E /* Transcoder.m in Sources */,
 				A49E24B8180EDC5E00C4B589 /* FLVWriter.m in Sources */,
 				A49E24CB180FF74500C4B589 /* NSMutableData+AMF.m in Sources */,
 				A49E24BC180EDC5E00C4B589 /* FLVMetadata.m in Sources */,
 				A4AD35A218030386002315B2 /* OutputStream.m in Sources */,
+				93FB643818108F26008FD383 /* MP4Atom.m in Sources */,
+				93FB643A18108F26008FD383 /* MP4Reader.m in Sources */,
 				A49E24BB180EDC5E00C4B589 /* FLVHeader.m in Sources */,
 				A49E24C1180EDCD300C4B589 /* NSData+Hex.m in Sources */,
 				A4AD359F1802FE99002315B2 /* InputStream.m in Sources */,
 				A49E24BD180EDC5E00C4B589 /* FLVTag.m in Sources */,
+				93FB643B18108F26008FD383 /* MP4Record.m in Sources */,
 				A49E24B9180EDC5E00C4B589 /* NSMutableData+Bytes.m in Sources */,
 				A4AD35A518041692002315B2 /* InputFile.m in Sources */,
 				A4554DCA17FDC2BD005780ED /* FFmpeg.m in Sources */,
@@ -521,12 +545,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/livestation/benchmarks/librtmp-iOS/include",
+					"../rtmp-wrapper/librtmp-iOS/include",
 				);
 				INFOPLIST_FILE = "ffmpeg-wrapperTests/ffmpeg-wrapperTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/livestation/benchmarks/librtmp-iOS/lib",
+					"../rtmp-wrapper/librtmp-iOS/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
@@ -548,12 +572,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/livestation/benchmarks/librtmp-iOS/include",
+					"../rtmp-wrapper/librtmp-iOS/include",
 				);
 				INFOPLIST_FILE = "ffmpeg-wrapperTests/ffmpeg-wrapperTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/livestation/benchmarks/librtmp-iOS/lib",
+					"../rtmp-wrapper/librtmp-iOS/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;

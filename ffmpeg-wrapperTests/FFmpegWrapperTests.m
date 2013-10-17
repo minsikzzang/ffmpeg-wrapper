@@ -16,6 +16,7 @@
 #import "FLVTag.h"
 #import "NSMutableData+Bytes.h"
 #import "NSData+Bytes.h"
+#import "MP4Reader.h"
 
 @interface FFmpegWrapperTests : XCTestCase
 
@@ -134,6 +135,8 @@ NSString const* kSourceFLV = @"http://bcn01.livestation.com/test.flv";
         
         if (*(bytes + position + 1) == 1) {
           NSLog(@"NALU");
+        } else {
+          NSLog(@"AVCc: %@", [[NSData dataWithBytes:bytes + position + 1 length:size - 1] hexString]);
         }
         
         int ts = AMF_DecodeInt24(bytes + position + 2);
@@ -181,19 +184,24 @@ NSString const* kSourceFLV = @"http://bcn01.livestation.com/test.flv";
   }
 }
 
+// Read MP4 AVCDecoderConfigurationRecord
+//
 - (void)tryOne:(NSData *)mp4 flv:(NSData *)flv {
-  
+  // Read MP4 AVCDecoderConfigurationRecord
+  MP4Reader *mp4Reader = [[MP4Reader alloc] init];
+  [mp4Reader readData:mp4];  
+  [mp4Reader release];
+  [self parseFlv:flv];
 }
 
 - (void)testMpeg4toFlv {
-  NSString *path = NSTemporaryDirectory();
-  NSString *mp4Path = [path stringByAppendingPathComponent:@"test.mp4"];
+  // NSString *path = NSTemporaryDirectory();
+  // NSString *mp4Path = [path stringByAppendingPathComponent:@"test.mp4"];
   
   // Write downloaded mp4 file to local file system
-  [mp4 writeToFile:mp4Path atomically:YES];
+  // [mp4 writeToFile:mp4Path atomically:YES];
   
   // NSString *flvPath = [path stringByAppendingPathComponent:@"test.flv"];
-  NSString *flvPath = @"http://bcn01.livestation.com/test.flv";
 
   // NSFileManager *fileManager = [NSFileManager defaultManager];
   // If flv file already exists, remove it
@@ -201,12 +209,12 @@ NSString const* kSourceFLV = @"http://bcn01.livestation.com/test.flv";
   //  [fileManager removeItemAtPath:flvPath error:nil];
   // }
 
-  NSLog(@"mp4 data size: %d", [mp4 length]);
-  NSLog(@"mp4 path %@, flv path %@", mp4Path, flvPath);
+  // NSLog(@"mp4 data size: %d", [mp4 length]);
+  // NSLog(@"mp4 path %@, flv path %@", mp4Path, flvPath);
 
   // Download test mp4 file from test server
   NSData *mp4 =[NSData dataWithContentsOfURL:[NSURL URLWithString:(NSString *)kSourceMP4]];
-  NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:flvPath]];
+  NSData *flv = [NSData dataWithContentsOfURL:[NSURL URLWithString:(NSString *)kSourceFLV]];
   
   // NSLog(@"mp4%@", [mp4 hexString:10240]);
   // NSLog(@"flv%@", [data hexString:10240]);
@@ -214,9 +222,10 @@ NSString const* kSourceFLV = @"http://bcn01.livestation.com/test.flv";
   // [self parseMp4:[NSData dataWithBytes:[mp4 bytes] length:102400]];
   // NSLog(@"\n\nFLV\n\n");
   // [self parseFlv:[NSData dataWithBytes:[data bytes] length:204800]];
-  [self tryOne:];
+  [self tryOne:mp4 flv:flv];
   return;
   
+  NSData *data;
   RTMP *r = RTMP_Alloc();
   RTMP_LogSetLevel(RTMP_LOGALL);
   RTMP_LogCallback(rtmpLog);
