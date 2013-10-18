@@ -15,8 +15,8 @@
 #import "NSData+Hex.h"
 #import "FLVTag.h"
 #import "NSMutableData+Bytes.h"
-#import "NSData+Bytes.h"
 #import "MP4Reader.h"
+#import "IFBytesData.h"
 
 @interface FFmpegWrapperTests : XCTestCase
 
@@ -47,7 +47,7 @@ NSString const* kSourceFLV = @"http://bcn01.livestation.com/test.flv";
   return l;
 }
 
-- (void)parseMp4:(NSData *)mp4 {
+- (void)parseMp4:(IFBytesData *)mp4 {
   unsigned long position = 0;
   char *bytes = (char *)[mp4 bytes];
   BOOL foundMdat = NO;
@@ -95,7 +95,7 @@ NSString const* kSourceFLV = @"http://bcn01.livestation.com/test.flv";
   }
 }
 
-- (void)parseFlv:(NSData *)flv {
+- (void)parseFlv:(IFBytesData *)flv {
   unsigned long position = 13;
   
   char *bytes = (char *)[flv bytes];
@@ -147,8 +147,17 @@ NSString const* kSourceFLV = @"http://bcn01.livestation.com/test.flv";
         NSLog(@"TS: %d", ts);
       } else if (flagsSize == 2) {
         char first = *(bytes + position);
+        char second = *(bytes + position + 1);
         if (first & 10) {
           NSLog(@"AAC");
+        }
+        
+        if (second == 0) {
+          NSLog(@"AAC SEQUENCE HEADER%@", [[NSData dataWithBytesNoCopy:bytes + position + 2
+                                                                length:size - 2
+                                                          freeWhenDone:NO] hexString]);
+        } else if (second == 1) {
+          NSLog(@"AAC RAW");
         }
         
         if (first & 3) {
@@ -188,14 +197,153 @@ NSString const* kSourceFLV = @"http://bcn01.livestation.com/test.flv";
   }
 }
 
+- (void)publishFLV:(IFBytesData *)flv
+withVideoDecoderConf:(NSData *)videoDecoderBytes
+withAudioDecoderConf:(NSData *)audioDecoderBytes {
+  RTMP *r = RTMP_Alloc();
+  RTMP_LogSetLevel(RTMP_LOGALL);
+  RTMP_LogCallback(rtmpLog);
+  
+  RTMP_Init(r);
+  if (!RTMP_SetupURL(r, "rtmp://media20.lsops.net/live/protos")) {
+    return;
+  }
+  
+  RTMP_EnableWrite(r);
+  if (!RTMP_Connect(r, NULL) || !RTMP_ConnectStream(r, 0)) {
+    return;
+  }
+  
+  FLVMetadata *metadata = [[FLVMetadata alloc] init];
+  // set video encoding metadata
+  metadata.width = 640;
+  metadata.height = 360;
+  metadata.videoBitrate = 300;
+  metadata.framerate = 25;
+  metadata.videoCodecId = kFLVCodecIdH264;
+  
+  metadata.audioBitrate = 200;
+  metadata.sampleRate = 44100;
+  metadata.sampleSize = 16;// * 1024; // 16K
+  metadata.stereo = YES;
+  metadata.audioCodecId = kFLVCodecIdAAC;
+
+  unsigned long position = 13;
+  
+  FLVWriter *f = [[FLVWriter alloc] init];
+  char *bytes = (char *)[flv bytes];
+  while ([flv length] >= position + 11) {
+    char packetType = (char)*(bytes + position);
+    int size = AMF_DecodeInt24(bytes + position + 1);
+    unsigned long ts = AMF_DecodeInt24(bytes + position + 4);
+    char t = *((char *)[flv bytes] + position + 5);
+    t = t << 24;
+    ts |= t;
+    position += 11;
+    int flagsSize = 0;
+    NSData *pkt = nil;
+    NSData *body = nil;
+    
+    // Video type packet
+    if (packetType == 0x09) {
+      // Video packet always flags size 5
+      flagsSize = 5;
+      Byte second = *(bytes + position + 1);
+      
+      if (second == 0) {
+        [f writeVideoDecoderConfRecord:videoDecoderBytes];
+      } else if (second == 1) {
+        body = [NSData dataWithBytes:(char *)(bytes + position + flagsSize)
+                              length:size];
+        [f writeVideoPacket:body timestamp:ts keyFrame:NO];
+      }
+      
+      /*
+      
+
+      NSLog(@"%x", *(bytes + position) & 0x0f);
+      if ((*(bytes + position) & 0x0f) == 0x07) {
+        NSLog(@"H264");
+      }
+      if ((*(bytes + position) & 0xf0) == 0x10) {
+        NSLog(@"SEEKABLE");
+      } else if ((*(bytes + position) & 0xf0) == 0x20) {
+        NSLog(@"NON-SEEKABLE");
+      }
+      
+      if (*(bytes + position + 1) == 1) {
+        NSLog(@"NALU");
+      } else {
+        NSLog(@"AVCc\n");
+        NSLog(@"FLAGS: %@", [[NSData dataWithBytes:bytes + position length:flagsSize] hexString]);
+        NSLog(@"TAG BODY%@", [[NSData dataWithBytesNoCopy:bytes + position + flagsSize
+                                                   length:size - flagsSize
+                                             freeWhenDone:NO] hexString]);
+      }
+      
+      int ts = AMF_DecodeInt24(bytes + position + 2);
+      NSLog(@"TS: %d", ts);
+*/
+      
+      
+      pkt = [f.packet retain];
+    } else if (packetType == 0x08) {
+      // Audio packet always flags size 5
+      flagsSize = 2;
+      
+      // Second byte in flags is audio data type
+      char second = *(bytes + position + 1);
+      if (second == 0) {
+        [f writeAudioDecoderConfRecord:audioDecoderBytes];
+      } else if (second == 1) {
+        body = [NSData dataWithBytes:(char *)(bytes + position + flagsSize)
+                              length:size];
+        [f writeAudioPacket:body timestamp:ts];
+      }
+      pkt = [f.packet retain];
+
+    } else {
+      flagsSize = 1;
+      [f writeMetaTag:metadata];
+      pkt = [f.packet retain];
+    }
+    if (pkt) {
+      RTMP_Write(r, [pkt bytes], [pkt length]);
+      [pkt release];
+    }
+    
+    position += size + 4;
+    [f reset];
+  }
+  
+  [f release];
+  RTMP_Free(r);
+}
+
 // Read MP4 AVCDecoderConfigurationRecord
 //
 - (void)tryOne:(NSData *)mp4 flv:(NSData *)flv {
-  // Read MP4 AVCDecoderConfigurationRecord
+  // Read MP4
   MP4Reader *mp4Reader = [[MP4Reader alloc] init];
-  [mp4Reader readData:mp4];  
+  [mp4Reader readData:[IFBytesData dataWithNSData:mp4]];
+  
+  NSData *videoDecoderBytes = [mp4Reader.videoDecoderBytes retain];
+  NSData *audioDecoderBytes = [mp4Reader.audioDecoderBytes retain];
+  
   [mp4Reader release];
-  [self parseFlv:flv];
+  
+  // Get AVCDecoderConfigurationRecord
+  NSLog(@"videoDecoderBytes%@", [videoDecoderBytes hexString]);
+  
+  // Get ACCDecoderConfigurationRecord
+  NSLog(@"audioDecoderBytes%@", [audioDecoderBytes hexString]);
+
+  
+  // Read FLV and publish to the media server with the given video and audio
+  // decoder configuration record.
+  [self publishFLV:[IFBytesData dataWithNSData:flv]
+withVideoDecoderConf:videoDecoderBytes
+withAudioDecoderConf:audioDecoderBytes];
 }
 
 - (void)testMpeg4toFlv {
