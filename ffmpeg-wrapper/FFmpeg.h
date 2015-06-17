@@ -26,7 +26,6 @@ extern NSString const* kMovieFLV;
 @property (atomic, assign) int width;
 @property (atomic, assign) int height;
 
-- (void)run:(FFmpegProgressBlock)pregressBlock
-completionBlock:(FFmpegCompletioBlock)completionBlock;
+- (void)run:(FFmpegProgressBlock)progressBlock completionBlock:(FFmpegCompletioBlock)completionBlock;
 
 @end
