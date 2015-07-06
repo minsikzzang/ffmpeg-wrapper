@@ -109,7 +109,7 @@ void av_log_callback(void *opaque, int format, const char *str, va_list va) {
   }
 }
 
-- (void)run:(FFmpegProgressBlock)pregressBlock
+- (void)run:(FFmpegProgressBlock)progressBlock
 completionBlock:(FFmpegCompletioBlock)completionBlock {
   // input and output should be present
   if (inputFile == nil || outputFile == nil) {
